@@ -51,8 +51,11 @@ class Strawberry(GameObject):
   def move(self):
     self.x += self.dx
     self.y += self.dy
+
     if self.x > 500 or self.x < -64:
       self.reset()
+      self.dx = (randint(0, 200) / 100) + 1 
+      self.dx *= choice([-1, 1])
 
   def reset(self):
     self.y = choice(lanes)
