@@ -1,6 +1,7 @@
 import pygame
 import sys
-from random import randint, choice, random
+from random import randint, choice
+from sounds import Sounds
 
 
 pygame.init()
@@ -165,11 +166,20 @@ fruit_sprites = pygame.sprite.Group()
 fruit_sprites.add(apple)
 fruit_sprites.add(strawberry)
 
+bg_music = Sounds()
+bg_music.play_bg_music()
+
 running = True
 
 game_over = False
 
 while running:
+  
+  # Fill the screen with the scaled background image
+  bg_image = pygame.image.load('images/background.jpg')
+  scaled_bg_image = pygame.transform.scale(bg_image, [500, 500])
+  screen.blit(scaled_bg_image, (0, 0))
+
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       running = False
@@ -197,7 +207,6 @@ while running:
       elif event.key == pygame.K_q:								# if Q is pressed, game quits.
         sys.exit()
 
-  screen.fill((255, 255, 255))
 
   # Move and render Sprites
   for entity in all_sprites:
@@ -220,6 +229,7 @@ while running:
     screen.blit(play_again_message, (75, 150))
         
 
+ 
   pygame.display.flip()
 
   clock.tick(30)
