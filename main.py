@@ -92,6 +92,7 @@ while running:
     fruit = pygame.sprite.spritecollideany(player, fruit_sprites)
     if fruit:
       fruits_captured += 0.2
+      bg_music.play_collision_sound()
       fruit.reset()
       
     if not game_over:
