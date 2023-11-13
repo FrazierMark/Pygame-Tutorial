@@ -103,6 +103,25 @@ class Alien(GameObject):
       return direction
 
 
+class Star(GameObject):
+ def __init__(self):
+   super(Star, self).__init__(0, 0, 'images/star.png')
+   self.dx = (randint(0, 200) / 100) + 1
+   self.dy = 0
+   self.reset()
+
+ def move(self):
+   self.x += self.dx
+   # Check the y position of the apple
+   if self.x > 550: 
+     self.reset()
+
+ # add a new method
+ def reset(self):
+   self.x = -80
+   self.y = choice(lanes)
+
+
 
 class Player(GameObject):
   def __init__(self):
@@ -153,14 +172,25 @@ strawberry = Strawberry()
 player = Player()
 alien = Alien()
 
+stars = []
+for i in range(3):
+  star = Star()
+  stars.append(star)
+
 clock = pygame.time.Clock()
 
 # Make a group
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
+all_sprites.add(star)
 all_sprites.add(apple)
 all_sprites.add(strawberry)
 all_sprites.add(alien)
+
+
+for star in stars:
+  all_sprites.add(star)
+
 
 fruit_sprites = pygame.sprite.Group()
 fruit_sprites.add(apple)
